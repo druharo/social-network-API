@@ -2,12 +2,18 @@
 
 module.exports = {
   up: (models, mongoose) => {
-    return models.User.bulkWrite([
+    return models.Thought.bulkWrite([
       {
         insertOne: {
           document: {
-            username: "druharo",
-            email: "ruharo@gmail.com",
+            thoughtText: 'We stand on shoulders of giants',
+            username: 'druharo',
+            reactions: [
+              {
+                reactionBody: 'No way this is true',
+                username: 'druharo'
+              }
+            ]
           }
         }
       }
@@ -18,9 +24,9 @@ module.exports = {
   },
 
   down: (models, mongoose) => {
-    return models.User.bulkWrite([
+    return models.Thought.bulkWrite([
       {
-        deleteMany: {
+        deleteOne: {
           filter: {
             username: 'druharo'
           }
